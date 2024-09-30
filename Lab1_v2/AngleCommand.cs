@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    class AngleCommand: ICommandsWithArgs
+    public class AngleCommand: ICommandsWithArgs
     {
         public void Execute(string str, Turtle turtle)
         {

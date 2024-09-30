@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    internal class MoveCommand: ICommandsWithArgs
+    public class MoveCommand: ICommandsWithArgs
     {
 
         public void Execute(string str, Turtle turtle)

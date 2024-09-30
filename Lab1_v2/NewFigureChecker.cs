@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    internal class NewFigureChecker
+    public class NewFigureChecker
     {
         private string path;
         private Turtle turtle;

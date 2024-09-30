@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    internal class HistoryCommand: ICommandsWithoutArgs
+    public class HistoryCommand: ICommandsWithoutArgs
     {
         private StorageReader storageReader;
 

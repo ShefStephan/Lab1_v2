@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    internal class PenUpCommand: ICommandsWithoutArgs
+    public class PenUpCommand: ICommandsWithoutArgs
     {
         public void Execute() { }
         public void Execute(Turtle turtle) {

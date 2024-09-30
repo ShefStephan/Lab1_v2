@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    internal class StorageReader
+    public class StorageReader
     {
         private string filePath;
 

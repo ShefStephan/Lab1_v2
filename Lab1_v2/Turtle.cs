@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    internal class Turtle
+    public class Turtle
     {
         double c_x;
         double c_y;

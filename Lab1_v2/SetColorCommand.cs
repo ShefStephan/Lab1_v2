@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    class SetColorCommand : ICommandsWithArgs
+    public class SetColorCommand : ICommandsWithArgs
     {
         public void Execute(string arg, Turtle turtle)
         {

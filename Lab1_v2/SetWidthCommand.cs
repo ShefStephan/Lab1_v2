@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    internal class SetWidthCommand: ICommandsWithArgs
+    public class SetWidthCommand: ICommandsWithArgs
     {
         public void Execute(string arg, Turtle turtle)
         {

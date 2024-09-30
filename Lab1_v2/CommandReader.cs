@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2
 {
-    class CommandReader
+    public class CommandReader
     {
         private string comm;
         private int arg;
