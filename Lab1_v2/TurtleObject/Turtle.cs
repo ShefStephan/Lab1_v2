@@ -3,95 +3,99 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1_v2.Commands;
 
-namespace Lab1_v2
+
+namespace Lab1_v2.TurtleObject
 {
     public class Turtle
     {
-        double c_x;
-        double c_y;
+        double coordX;
+        double coordY;
         bool penCondition;
         double angle;
         string color;
         double width;
 
 
-        public Turtle() {
-            c_x = 0;
-            c_y = 0;
+        public Turtle()
+        {
+            coordX = 0;
+            coordY = 0;
             angle = 0;
             penCondition = true;
             color = "black";
             width = 1;
-       
+
         }
 
-        public double Get_c_x()
+        public double GetCoordX()
         {
-            return c_x;
+            return coordX;
         }
 
-        public void Set_c_x(double value)
+        public void SetCoordx(double value)
         {
-            c_x += value;
+            coordX += value;
         }
 
-        public double Get_c_y()
+        public double GetCoordY()
         {
-            return c_y;
+            return coordY;
         }
 
-        public void Set_c_y(double value)
+        public void SetCoordY(double value)
         {
-            c_y += value;
+            coordY += value;
         }
 
 
-        public double Get_angle() 
-        { 
-            return angle; 
+        public double GetAngle()
+        {
+            return angle;
         }
 
-        public void Set_angle(double value)
+        public void SetAngle(double value)
         {
             angle = (angle + value) % 360;
         }
 
 
-        public string Get_penCondition()
+        public string GetPenCondition()
         {
-            if (penCondition) {
+            if (penCondition)
+            {
                 return "penDown";
             }
 
             return "penUp";
         }
 
-        public void Set_penCondition(bool value) 
+        public void SetPenCondition(bool value)
         {
             penCondition = value;
         }
 
-        public void SetColor(string value) 
+        public void SetColor(string value)
         {
             color = value;
         }
 
         public string GetColor()
-        { 
-            return color; 
+        {
+            return color;
         }
 
         public void SetWidth(double value)
         {
             width = value;
         }
-        
+
         public double GetWidth()
         {
             return width;
         }
 
     }
-   
+
 }

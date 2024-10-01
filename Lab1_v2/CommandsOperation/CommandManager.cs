@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1_v2.CommandsInterface;
+using Lab1_v2.Storage;
+using Lab1_v2.Commands;
 
-namespace Lab1_v2
+namespace Lab1_v2.CommandsOperation
 {
-    internal class CommandManager 
+    public class CommandManager
     {
         ICommands comm;
         private StorageReader reader;
@@ -39,7 +42,7 @@ namespace Lab1_v2
 
         public ICommands DefineCommand(string command)
         {
-            return commands_Dict[command];            
+            return commands_Dict[command];
 
         }
     }

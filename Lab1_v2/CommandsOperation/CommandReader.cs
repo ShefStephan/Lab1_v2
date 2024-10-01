@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1_v2
+namespace Lab1_v2.CommandsOperation
 {
     public class CommandReader
     {
@@ -18,7 +18,7 @@ namespace Lab1_v2
 
         }
 
-       
+
 
 
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1_v2
+namespace Lab1_v2.Storage
 {
     public class StorageWriter
     {
@@ -22,7 +22,7 @@ namespace Lab1_v2
             using (StreamWriter sw = new StreamWriter(filePath, true))
             {
                 //записывает данные, только после записи добавляет в файл символ окончания строки
-                sw.WriteLine(command);
+                sw.WriteLineAsync(command);
             }
         }
         //добавить сохранитель кооординат
@@ -30,10 +30,10 @@ namespace Lab1_v2
         // метод для очистки файла
         public void ClearFile()
         {
-            File.WriteAllText(filePath, string.Empty);
-          
+            File.WriteAllTextAsync(filePath, string.Empty);
+
         }
 
 
-        }
+    }
 }

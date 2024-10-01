@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1_v2.CommandsInterface;
+using Lab1_v2.Storage;
+using Lab1_v2.TurtleObject;
 
-namespace Lab1_v2
+namespace Lab1_v2.Commands
 {
-    internal class ListFiguresCommand: ICommandsWithoutArgs
+    public class ListFiguresCommand : ICommandsWithoutArgs
     {
         private StorageReader storageReader;
+        private string[] figuresMass;
         public ListFiguresCommand(StorageReader reader)
         {
             storageReader = reader;
         }
         public void Execute() { }
-        public void Execute (Turtle turtle) 
+        public void Execute(Turtle turtle)
         {
-            storageReader.ShowHistory();
+            Console.WriteLine(storageReader.GetHistoryFigures());
         }
     }
 }

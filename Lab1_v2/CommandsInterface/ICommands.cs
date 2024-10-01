@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1_v2
+namespace Lab1_v2.CommandsInterface
 {
-    internal interface ICommands
+    public interface ICommands
     {
-        public void Execute();
+        
     }
 }

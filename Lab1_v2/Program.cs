@@ -1,4 +1,8 @@
-﻿using Lab1_v2;
+﻿using Lab1_v2.CommandsInterface;
+using Lab1_v2.CommandsOperation;
+using Lab1_v2.ScreenNotificator;
+using Lab1_v2.Storage;
+using Lab1_v2.TurtleObject;
 using System.Linq;
 
 internal class Program
@@ -32,6 +36,8 @@ internal class Program
         // текст введенной команды
         string text;
 
+
+        //solid  - s ?
 
         Console.WriteLine("-------Welcome to the TURTLEGAME-------");
         Console.WriteLine();
@@ -80,21 +86,18 @@ internal class Program
                     Invoker.Invoke(command);
                     storageWriter.SaveCommand(text);
 
-                    Console.WriteLine(notificator.SendCondition(turtle));
+                    Console.WriteLine(notificator.ViewCondition(turtle));
 
                 }
 
                 else
                 {
                     ICommandsWithArgs command = (ICommandsWithArgs)manager.DefineCommand(text.Split(' ')[0]);
+                    // visitor or remove invoker
                     Invoker.Invoke(command, text.Split(' ')[1]);
                     storageWriter.SaveCommand(text);
-                    Console.WriteLine(notificator.SendCondition(turtle));
+                    Console.WriteLine(notificator.ViewCondition(turtle));
                 }
-                //else
-                //{
-                //    Console.WriteLine("command doesn`t exist");
-                //}
 
                 checker.Check();
             }
@@ -104,10 +107,10 @@ internal class Program
                 Console.WriteLine("Invalid argument");
             }
 
-            //catch (ArgumentException ex)
-            //{
-            //    Console.WriteLine("Invalid argument");
-            //}
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("Invalid argument");
+            }
 
             catch (KeyNotFoundException ex)
             {

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1_v2.CommandsInterface;
+using Lab1_v2.TurtleObject;
 
-namespace Lab1_v2
+namespace Lab1_v2.CommandsOperation
 {
-    internal class CommandInvoker
+    public class CommandInvoker
     {
 
         Turtle turtle;
@@ -23,7 +25,7 @@ namespace Lab1_v2
 
         public void Invoke(ICommandsWithArgs comm, string arg)
         {
-            comm.Execute(arg, turtle);
+            comm.Execute(turtle, arg);
         }
     }
 }

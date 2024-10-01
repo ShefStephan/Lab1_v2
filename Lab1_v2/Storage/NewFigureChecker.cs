@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1_v2.TurtleObject;
 
-namespace Lab1_v2
+namespace Lab1_v2.Storage
 {
     public class NewFigureChecker
     {
         private string path;
         private Turtle turtle;
         private List<(double x, double y)> points = new List<(double x, double y)>() { };
-        private double last_x;
-        private double last_y;
+        private double lastX;
+        private double lastY;
         private string figure;
         private StorageWriter writer;
-        
+
 
         public NewFigureChecker(Turtle turtle, StorageWriter writer)
         {
             this.turtle = turtle;
             points.Add((0, 0));
-            last_x = points[0].x;
-            last_y = points[0].y;
+            lastX = points[0].x;
+            lastY = points[0].y;
             this.writer = writer;
         }
 
@@ -30,20 +31,20 @@ namespace Lab1_v2
 
         public void Check()
         {
-            if (turtle.Get_penCondition() == "penDown")
+            if (turtle.GetPenCondition() == "penDown")
             {
-                if (last_x != Math.Round(turtle.Get_c_x(), 2) || last_y != Math.Round(turtle.Get_c_y(), 2))
+                if (lastX != Math.Round(turtle.GetCoordX(), 2) || lastY != Math.Round(turtle.GetCoordY(), 2))
                 {
-                    points.Add((Math.Round(turtle.Get_c_x(), 2), Math.Round(turtle.Get_c_y(), 2)));
+                    points.Add((Math.Round(turtle.GetCoordX(), 2), Math.Round(turtle.GetCoordY(), 2)));
 
-                    last_x = points[points.Count - 1].x;
-                    last_y = points[points.Count - 1].y;
+                    lastX = points[points.Count - 1].x;
+                    lastY = points[points.Count - 1].y;
 
 
                     if (points.Count > 1 && points[0] == points[^1])
                     {
-                        
-                        switch (points.Count-1)
+
+                        switch (points.Count - 1)
                         {
                             case 3:
                                 figure = "треугольник";
@@ -78,7 +79,7 @@ namespace Lab1_v2
 
         }
 
-   
+
 
         public string ListToString()
         {

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1_v2.CommandsInterface;
+using Lab1_v2.TurtleObject;
 
-namespace Lab1_v2
+namespace Lab1_v2.Commands
 {
-    public class SetWidthCommand: ICommandsWithArgs
+    public class SetWidthCommand : ICommandsWithArgs
     {
-        public void Execute(string arg, Turtle turtle)
+        public void Execute(Turtle turtle, string arg)
         {
             turtle.SetWidth(double.Parse(arg));
 
