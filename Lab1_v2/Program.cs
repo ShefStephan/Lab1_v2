@@ -25,19 +25,23 @@ internal class Program
         CommandManager manager = new CommandManager(storageReader, storageReaderForFigures);
         CommandInvoker Invoker = new CommandInvoker(turtle);
         NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
-        
-        Notificator notificator = new Notificator();
+        Notificator notificator = new Notificator(storageReader, storageReaderForFigures);
 
         
         // список команда без аргументов и с аргументами
-        List<string> commWithoutArgsList = new List<string>() { "penup", "pendown", "history" };
+        List<string> commWithoutArgsList = new List<string>() { "penup", "pendown", "history", "listfigures"};
         List<string> commWithArgsList = new List<string>() { "move", "angle" , "color", "width"};
 
-        // текст введенной команды
-        string text;
+        // текст введенной пользователем команды
+        string userCommand;
 
 
         //solid  - s ?
+        // S - Принцип единственной ответственности
+        // O - 
+        // L - 
+        // I - 
+        // D - 
 
         Console.WriteLine("-------Welcome to the TURTLEGAME-------");
         Console.WriteLine();
@@ -58,50 +62,40 @@ internal class Program
         {
             try
             {
-                text = reader.Read();
+                userCommand = reader.Read();
 
-                if (text == "exit")
+                if (userCommand == "exit")
                 {
                     break;
                 }
 
-                else if (text == "history")
+                else if (commWithoutArgsList.Contains(userCommand))
                 {
-                    ICommandsWithoutArgs command = (ICommandsWithoutArgs)manager.DefineCommand(text);
+                    ICommandsWithoutArgs command = (ICommandsWithoutArgs)manager.DefineCommand(userCommand);
                     Invoker.Invoke(command);
-                    storageWriter.SaveCommand(text);
-
-                }
-
-                else if (text == "listfigures")
-                {
-                    ICommandsWithoutArgs command = (ICommandsWithoutArgs)manager.DefineCommand(text);
-                    Invoker.Invoke(command);
-                }
-
-                else if (commWithoutArgsList.Contains(text))
-                {
-
-                    ICommandsWithoutArgs command = (ICommandsWithoutArgs)manager.DefineCommand(text);
-                    Invoker.Invoke(command);
-                    storageWriter.SaveCommand(text);
-
-                    Console.WriteLine(notificator.ViewCondition(turtle));
+                    storageWriter.SaveCommand(userCommand);
 
                 }
 
                 else
                 {
-                    ICommandsWithArgs command = (ICommandsWithArgs)manager.DefineCommand(text.Split(' ')[0]);
+                    ICommandsWithArgs command = (ICommandsWithArgs)manager.DefineCommand(userCommand.Split(' ')[0]);
                     // visitor or remove invoker
-                    Invoker.Invoke(command, text.Split(' ')[1]);
-                    storageWriter.SaveCommand(text);
-                    Console.WriteLine(notificator.ViewCondition(turtle));
+                    Invoker.Invoke(command, userCommand.Split(' ')[1]);
+                    storageWriter.SaveCommand(userCommand);
                 }
 
+
+
+                // вывод соообщение после испольнения команды
+                notificator.SendNotification(userCommand, turtle);
+
+                // проверка на образование новой фигуры
                 checker.Check();
             }
 
+
+            // возможные ошибки в ходе выполнения
             catch (InvalidCastException ex)
             {
                 Console.WriteLine("Invalid argument");
@@ -109,7 +103,7 @@ internal class Program
 
             catch (IndexOutOfRangeException ex)
             {
-                Console.WriteLine("Invalid argument");
+                Console.WriteLine("Invalid argument, or argument doesn`t exist");
             }
 
             catch (KeyNotFoundException ex)
@@ -128,10 +122,9 @@ internal class Program
 
         Console.WriteLine("GAME END");
 
-        // очищение файла с командами
+        // очищение файла с командами и фигурами
         storageWriter.ClearFile();
         storageWriterForFigures.ClearFile();
-        //checker.ShowList();
        
 ;
     }

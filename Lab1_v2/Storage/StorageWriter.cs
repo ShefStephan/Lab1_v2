@@ -16,21 +16,21 @@ namespace Lab1_v2.Storage
             filePath = path;
         }
 
-        public void SaveCommand(string command)
+        public async Task SaveCommand(string command)
         {
             //команда записывается в конец файла (параметр true)
             using (StreamWriter sw = new StreamWriter(filePath, true))
             {
                 //записывает данные, только после записи добавляет в файл символ окончания строки
-                sw.WriteLineAsync(command);
+                await sw.WriteLineAsync(command);
             }
         }
         //добавить сохранитель кооординат
 
         // метод для очистки файла
-        public void ClearFile()
+        public async Task ClearFile()
         {
-            File.WriteAllTextAsync(filePath, string.Empty);
+            await File.WriteAllTextAsync(filePath, string.Empty);
 
         }
 

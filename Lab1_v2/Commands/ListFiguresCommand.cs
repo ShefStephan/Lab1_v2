@@ -20,7 +20,7 @@ namespace Lab1_v2.Commands
         public void Execute() { }
         public void Execute(Turtle turtle)
         {
-            Console.WriteLine(storageReader.GetHistoryFigures());
+            storageReader.SetHistoryFigures();
         }
     }
 }

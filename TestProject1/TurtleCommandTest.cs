@@ -10,27 +10,53 @@ namespace TestProject1
     public class TurtleCommandTest
     {
 
-        //TODO expected должно быть рандомным значением
-        [Fact] //TODO почитать про [Theory]
-        public void TestMoveCommand()
+        //тестовые данные
+        [Theory] 
+        [InlineData("5", 0, 5)]
+        [InlineData("7", 0, 7)]
+        [InlineData("10", 0, 10)]
+        public void TestMoveCommand(string str, double expX, double expY)
         {
-            //тестовые данные
+  
             Turtle turtle = new Turtle();
             MoveCommand moveCommand = new MoveCommand();
-            string command = "5";
-            double expected_x = 0;
-            double expected_y = 5;
+
+            string command = str;
+            double expectedX = expX;
+            double expectedY = expY;
 
             //действие
-            moveCommand.Execute(command, turtle);
-            double actual_x = turtle.GetCoordX();
-            double actual_y = turtle.GetCoordY();
+            moveCommand.Execute(turtle, command);
+            double actualX = turtle.GetCoordX();
+            double actualY = turtle.GetCoordY();
 
             //проверка
-            Assert.Equal(expected_x, actual_x);
-            Assert.Equal (expected_y, actual_y);
+            Assert.Equal(expectedX, actualX);
+            Assert.Equal (expectedY, actualY);
 
         }
+
+        [Fact]
+        public void TestMoveCommandWithRandomData()
+        {
+            // инициализация
+            Random rnd = new Random();
+            Turtle turtle = new Turtle();
+            MoveCommand moveCommand = new MoveCommand();
+
+            //данные
+            string command = rnd.Next(100).ToString();
+            double expectedY = double.Parse(command);
+
+            //действие
+            moveCommand.Execute(turtle, command);
+
+            //проверка
+            Assert.Equal(0, turtle.GetCoordX());
+            Assert.Equal(expectedY, turtle.GetCoordY());
+
+        }
+
 
         [Fact]
         public void TestAngleCommand()
@@ -92,7 +118,7 @@ namespace TestProject1
 
 
             //действие
-            setColorCommand.Execute(command, turtle);
+            setColorCommand.Execute(turtle, command);
             string actual = turtle.GetColor();
 
             //проверка

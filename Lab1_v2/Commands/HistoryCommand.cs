@@ -22,7 +22,7 @@ namespace Lab1_v2.Commands
 
         public void Execute(Turtle turtle)
         {
-            storageReader.GetHistory();
+            storageReader.SetHistory();
         }
 
 
