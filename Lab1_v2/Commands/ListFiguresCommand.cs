@@ -12,7 +12,6 @@ namespace Lab1_v2.Commands
     public class ListFiguresCommand : ICommandsWithoutArgs
     {
         private StorageReader storageReader;
-        private string[] figuresMass;
         public ListFiguresCommand(StorageReader reader)
         {
             storageReader = reader;

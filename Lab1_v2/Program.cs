@@ -116,6 +116,11 @@ internal class Program
                 Console.WriteLine("Invalid argument, please try again or check command list");
             }
 
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine("empty...");
+            }
+
 
 
         }

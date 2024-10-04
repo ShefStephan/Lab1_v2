@@ -12,6 +12,7 @@ namespace Lab1_v2.ScreenNotificator
     {
         private StorageReader historyCommandReader;
         private StorageReader historyFiguresReader;
+        private string[] figures;
 
         public Notificator(StorageReader historyCommandReader, StorageReader historyFiguresReader)
         {
@@ -30,6 +31,7 @@ namespace Lab1_v2.ScreenNotificator
                 }
                
             }
+
             else if (command == "listfigures")
             {
                 foreach (var figure in historyFiguresReader.GetFigures())

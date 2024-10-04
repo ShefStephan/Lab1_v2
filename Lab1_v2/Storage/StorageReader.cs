@@ -21,7 +21,6 @@ namespace Lab1_v2.Storage
         public async Task SetHistory()
         {
             commands = await File.ReadAllLinesAsync(filePath);
-            
         }
 
         public string[] GetHistory()

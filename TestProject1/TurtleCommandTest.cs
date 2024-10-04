@@ -12,8 +12,8 @@ namespace TestProject1
 
         //тестовые данные
         [Theory] 
-        [InlineData("5", 0, 5)]
-        [InlineData("7", 0, 7)]
+        [InlineData("-5", 0, -5)]
+        [InlineData("0", 0, 0)]
         [InlineData("10", 0, 10)]
         public void TestMoveCommand(string str, double expX, double expY)
         {
@@ -58,14 +58,18 @@ namespace TestProject1
         }
 
 
-        [Fact]
-        public void TestAngleCommand()
+        [Theory]
+        [InlineData("120", 120)]
+        [InlineData("400", 40)]
+        [InlineData("-120", -120)]
+
+        public void TestAngleCommand(string str, double exp)
         {
             //тестовые данные
             Turtle turtle = new Turtle();
             AngleCommand angleCommand = new AngleCommand();
-            string command = "90";
-            double expected = 90;
+            string command = str;
+            double expected = exp;
             
 
             //действие
@@ -199,32 +203,32 @@ namespace TestProject1
 
         }
 
-        //[Fact]
-        //public void TestFigureCooerds()
-        //{
-        //    string filePathFigures = "TestForFiguresChecker2.txt";
-        //    StorageWriter storageWriterForFigures = new StorageWriter(filePathFigures);
-        //    Turtle turtle = new Turtle();
-        //    MoveCommand moveCommand = new MoveCommand();
-        //    AngleCommand angleCommand = new AngleCommand();
-        //    NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
-        //    string expected = "{(0;0)(0;10)(8,66;5)(0;-0)}";
+        [Fact]
+        public void TestFigureCoords()
+        {
+            string filePathFigures = "TestForFiguresChecker2.txt";
+            StorageWriter storageWriterForFigures = new StorageWriter(filePathFigures);
+            Turtle turtle = new Turtle();
+            MoveCommand moveCommand = new MoveCommand();
+            AngleCommand angleCommand = new AngleCommand();
+            NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
+            string expected = "{(0;0)(0;10)(8,66;5)(0;-0)}";
 
-        //    moveCommand.Execute("10", turtle);
-        //    checker.Check();
-        //    angleCommand.Execute("120", turtle);
-        //    checker.Check();
-        //    moveCommand.Execute("10", turtle);
-        //    checker.Check();
-        //    angleCommand.Execute("120", turtle);
-        //    checker.Check();
-        //    moveCommand.Execute("10", turtle);
-        //    checker.Check();
+            moveCommand.Execute(turtle, "10");
+            checker.Check();
+            angleCommand.Execute(turtle, "120");
+            checker.Check();
+            moveCommand.Execute(turtle, "10");
+            checker.Check();
+            angleCommand.Execute(turtle, "120");
+            checker.Check();
+            moveCommand.Execute(turtle, "10");
+            checker.Check();
 
-        //    string actual = File.ReadAllLines(filePathFigures)[0];
+            string actual = File.ReadAllLines(filePathFigures)[0];
 
-        //    Assert.Contains(expected, actual);
-        //}
+            Assert.Contains(expected, actual);
+        }
 
 
     }
