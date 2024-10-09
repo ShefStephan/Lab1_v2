@@ -139,7 +139,7 @@ namespace TestProject1
             Turtle turtle = new Turtle();
             SetWidthCommand setWidthCommand = new SetWidthCommand();
             string command = rnd.Next(1000).ToString();
-            double expected = 1;
+            double expected = int.Parse(command);
 
 
             //действие
