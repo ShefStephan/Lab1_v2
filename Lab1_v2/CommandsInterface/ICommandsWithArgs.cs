@@ -9,8 +9,6 @@ namespace Lab1_v2.CommandsInterface
 {
     public interface ICommandsWithArgs : ICommands
     {
-        //void Execute(string arg, Turtle turtle);
-
         void Execute(Turtle turtle, string arg = null);
     
     }

@@ -15,10 +15,5 @@ namespace Lab1_v2.Commands
             turtle.SetColor(arg);
 
         }
-
-        public void Execute()
-        {
-
-        }
     }
 }

@@ -11,7 +11,6 @@ namespace Lab1_v2.CommandsOperation
 {
     public class CommandManager
     {
-        ICommands comm;
         private StorageReader reader;
         private StorageReader figuresReader;
 
@@ -23,7 +22,7 @@ namespace Lab1_v2.CommandsOperation
 
         }
 
-        Dictionary<string, ICommands> commands_Dict = new Dictionary<string, ICommands>() { };
+        private Dictionary<string, ICommands> commands_Dict = new Dictionary<string, ICommands>() { };
 
         private void fillDict()
         {

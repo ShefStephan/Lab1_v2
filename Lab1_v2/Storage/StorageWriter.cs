@@ -16,7 +16,7 @@ namespace Lab1_v2.Storage
             filePath = path;
         }
 
-        public async Task SaveCommand(string command)
+        public async Task SaveCommandAsync(string command)
         {
             //команда записывается в конец файла (параметр true)
             using (StreamWriter sw = new StreamWriter(filePath, true))

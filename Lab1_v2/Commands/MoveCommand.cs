@@ -21,10 +21,6 @@ namespace Lab1_v2.Commands
                 * Math.Cos(turtle.GetAngle() * (Math.PI / 180)));
 
         }
-
-        public void Execute()
-        {
-
-        }
+        
     }
 }

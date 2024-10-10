@@ -15,10 +15,6 @@ namespace Lab1_v2.Commands
             turtle.SetWidth(double.Parse(arg));
 
         }
-
-        public void Execute()
-        {
-
-        }
+        
     }
 }

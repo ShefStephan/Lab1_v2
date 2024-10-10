@@ -30,7 +30,7 @@ internal class Program
         
         // список команда без аргументов и с аргументами
         List<string> commWithoutArgsList = new List<string>() { "penup", "pendown", "history", "listfigures"};
-        List<string> commWithArgsList = new List<string>() { "move", "angle" , "color", "width"};
+        //List<string> commWithArgsList = new List<string>() { "move", "angle" , "color", "width"};
 
         // текст введенной пользователем команды
         string userCommand;
@@ -69,11 +69,11 @@ internal class Program
                     break;
                 }
 
-                else if (commWithoutArgsList.Contains(userCommand))
+                if (commWithoutArgsList.Contains(userCommand))
                 {
                     ICommandsWithoutArgs command = (ICommandsWithoutArgs)manager.DefineCommand(userCommand);
                     Invoker.Invoke(command);
-                    storageWriter.SaveCommand(userCommand);
+                    storageWriter.SaveCommandAsync(userCommand);
 
                 }
 
@@ -82,7 +82,7 @@ internal class Program
                     ICommandsWithArgs command = (ICommandsWithArgs)manager.DefineCommand(userCommand.Split(' ')[0]);
                     // visitor or remove invoker
                     Invoker.Invoke(command, userCommand.Split(' ')[1]);
-                    storageWriter.SaveCommand(userCommand);
+                    storageWriter.SaveCommandAsync(userCommand);
                 }
 
 

@@ -10,12 +10,9 @@ namespace Lab1_v2.Commands
 {
     public class PenDownCommand : ICommandsWithoutArgs
     {
-        public void Execute() { }
         public void Execute(Turtle turtle)
         {
-
             turtle.SetPenCondition(true);
-            //Console.WriteLine("состояние: " + "перо поднято");
 
         }
 

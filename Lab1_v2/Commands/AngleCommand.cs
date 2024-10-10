@@ -16,10 +16,6 @@ namespace Lab1_v2.Commands
             turtle.SetAngle(int.Parse(str));
 
         }
-
-        public void Execute()
-        {
-
-        }
+        
     }
 }

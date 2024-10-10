@@ -9,7 +9,6 @@ namespace Lab1_v2.Storage
 {
     public class NewFigureChecker
     {
-        private string path;
         private Turtle turtle;
         private List<(double x, double y)> points = new List<(double x, double y)>() { };
         private double lastX;
@@ -22,8 +21,8 @@ namespace Lab1_v2.Storage
         {
             this.turtle = turtle;
             points.Add((0, 0));
-            lastX = points[0].x;
-            lastY = points[0].y;
+            lastX = 0;
+            lastY = 0;
             this.writer = writer;
         }
 
@@ -41,7 +40,7 @@ namespace Lab1_v2.Storage
                     lastY = points[points.Count - 1].y;
 
 
-                    if (points.Count > 1 && points[0] == points[^1])
+                    if (points.Count > 2 && points[0] == points[^1])
                     {
 
                         switch (points.Count - 1)
@@ -67,7 +66,7 @@ namespace Lab1_v2.Storage
                         Console.Write("Образована новая фигура: " + figure);
                         Console.WriteLine();
 
-                        writer.SaveCommand(figure + " " + ListToString());
+                        writer.SaveCommandAsync(figure + " " + CoordArrayToString());
                         points.Clear();
                     }
                 }
@@ -81,7 +80,7 @@ namespace Lab1_v2.Storage
 
 
 
-        public string ListToString()
+        private string CoordArrayToString()
         {
             string listString = "{";
             foreach (var point in points)

@@ -17,12 +17,11 @@ namespace Lab1_v2.Commands
         {
             storageReader = reader;
         }
-
-        public void Execute() { }
+        
 
         public void Execute(Turtle turtle)
         {
-            storageReader.SetHistory();
+            storageReader.SetHistoryAsync();
         }
 
 

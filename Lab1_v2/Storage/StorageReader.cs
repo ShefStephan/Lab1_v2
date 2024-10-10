@@ -18,7 +18,7 @@ namespace Lab1_v2.Storage
         }
 
         
-        public async Task SetHistory()
+        public async Task SetHistoryAsync()
         {
             commands = await File.ReadAllLinesAsync(filePath);
         }
@@ -30,7 +30,7 @@ namespace Lab1_v2.Storage
 
 
 
-        public async Task SetHistoryFigures()
+        public async Task SetHistoryFiguresAsync()
         {
             figures = await File.ReadAllLinesAsync(filePath);
         }

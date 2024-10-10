@@ -168,7 +168,7 @@ namespace TestProject1
 
             foreach (string command in commands)
             {
-                storageWriter.SaveCommand(command);
+                storageWriter.SaveCommandAsync(command);
             }
             string[] actual = File.ReadAllLines(filePath);
 

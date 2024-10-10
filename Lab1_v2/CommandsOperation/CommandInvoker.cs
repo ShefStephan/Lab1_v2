@@ -11,7 +11,7 @@ namespace Lab1_v2.CommandsOperation
     public class CommandInvoker
     {
 
-        Turtle turtle;
+        private Turtle turtle;
 
         public CommandInvoker(Turtle turtle)
         {
