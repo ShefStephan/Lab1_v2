@@ -28,8 +28,6 @@ namespace Lab1_v2.Storage
             return commands;
         }
 
-
-
         public async Task SetHistoryFiguresAsync()
         {
             figures = await File.ReadAllLinesAsync(filePath);

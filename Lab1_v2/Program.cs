@@ -23,7 +23,7 @@ internal class Program
 
         CommandReader reader = new CommandReader();
         CommandManager manager = new CommandManager(storageReader, storageReaderForFigures);
-        CommandInvoker Invoker = new CommandInvoker(turtle);
+        CommandInvoker invoker = new CommandInvoker(turtle);
         NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
         Notificator notificator = new Notificator(storageReader, storageReaderForFigures);
 
@@ -72,21 +72,21 @@ internal class Program
                 if (commWithoutArgsList.Contains(userCommand))
                 {
                     ICommandsWithoutArgs command = (ICommandsWithoutArgs)manager.DefineCommand(userCommand);
-                    Invoker.Invoke(command);
+                    
+                    invoker.Invoke(command);
                     storageWriter.SaveCommandAsync(userCommand);
+                    
 
-                }
-
-                else
+                } else
                 {
                     ICommandsWithArgs command = (ICommandsWithArgs)manager.DefineCommand(userCommand.Split(' ')[0]);
                     // visitor or remove invoker
-                    Invoker.Invoke(command, userCommand.Split(' ')[1]);
+                    invoker.Invoke(command, userCommand.Split(' ')[1]);
                     storageWriter.SaveCommandAsync(userCommand);
+                    
+                    
                 }
-
-
-
+                
                 // вывод соообщение после испольнения команды
                 notificator.SendNotification(userCommand, turtle);
 
@@ -115,7 +115,8 @@ internal class Program
             {
                 Console.WriteLine("Invalid argument, please try again or check command list");
             }
-
+            
+            
             catch (NullReferenceException ex)
             {
                 Console.WriteLine("empty...");
@@ -128,8 +129,8 @@ internal class Program
         Console.WriteLine("GAME END");
 
         // очищение файла с командами и фигурами
-        storageWriter.ClearFile();
-        storageWriterForFigures.ClearFile();
+        storageWriter.ClearFileAsync();
+        storageWriterForFigures.ClearFileAsync();
        
 ;
     }

@@ -28,7 +28,7 @@ namespace Lab1_v2.Storage
         //добавить сохранитель кооординат
 
         // метод для очистки файла
-        public async Task ClearFile()
+        public async Task ClearFileAsync()
         {
             await File.WriteAllTextAsync(filePath, string.Empty);
 

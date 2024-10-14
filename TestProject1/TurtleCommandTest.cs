@@ -174,7 +174,7 @@ namespace TestProject1
 
 
             Assert.Equal(expected, actual);
-            storageWriter.ClearFile();
+            storageWriter.ClearFileAsync();
 
 
         }
@@ -202,7 +202,7 @@ namespace TestProject1
             string actual = File.ReadAllLines(filePathFigures)[0];
 
             Assert.Contains(expected, actual);
-            storageWriterForFigures.ClearFile();
+            storageWriterForFigures.ClearFileAsync();
 
         }
 
@@ -229,14 +229,14 @@ namespace TestProject1
             string actual = File.ReadAllLines(filePathFigures)[0];
 
             Assert.Contains(expected, actual);
-            storageWriterForFigures.ClearFile();
+            storageWriterForFigures.ClearFileAsync();
 
         }
 
         [Fact]
         public void TestNewFigureCheckerExpectedPentagon()
         {
-            string filePathFigures = "TestForFiguresCheckerPntagon.txt";
+            string filePathFigures = "TestForFiguresCheckerPentagon.txt";
 
             StorageWriter storageWriterForFigures = new StorageWriter(filePathFigures);
             Turtle turtle = new Turtle();
@@ -256,7 +256,7 @@ namespace TestProject1
             string actual = File.ReadAllLines(filePathFigures)[0];
 
             Assert.Contains(expected, actual);
-            storageWriterForFigures.ClearFile();
+            storageWriterForFigures.ClearFileAsync();
         }
 
 
