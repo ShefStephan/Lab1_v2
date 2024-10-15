@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lab1_v2.Storage
 {
-    public class StorageWriter
+    public class StorageWriter: IStorageWriter
     {
         private string filePath;
 

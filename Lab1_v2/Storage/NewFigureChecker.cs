@@ -14,10 +14,10 @@ namespace Lab1_v2.Storage
         private double lastX;
         private double lastY;
         private string figure;
-        private StorageWriter writer;
+        private IStorageWriter writer;
 
 
-        public NewFigureChecker(Turtle turtle, StorageWriter writer)
+        public NewFigureChecker(Turtle turtle, IStorageWriter writer)
         {
             this.turtle = turtle;
             points.Add((0, 0));

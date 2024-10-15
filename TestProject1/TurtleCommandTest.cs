@@ -152,13 +152,7 @@ namespace TestProject1
             Assert.Equal(expected, actual);
 
         }
-
         
-        public interface IStorageWriter
-        {
-            void SaveCommandAsync(string command);
-            void ClearFileAsync();
-        }
         
         
         
@@ -189,140 +183,150 @@ namespace TestProject1
                 Assert.Equal(commands, savedCommands);
             }
         
-
-        // [Theory]
-        // [InlineData("move 5", "angle 90", "penup")]
-        // [InlineData("pedown", "penup", "move 5")]
-        // [InlineData("angle 78", "history", "width 10")]
-        // [InlineData("pendown", "color red", "move -5")]
-        // [InlineData("move 33", "penup", "history")]
-        // public void TestHistoryCommandWithInlineData(params string[] commands)
-        // {
-        //     //тестовые данные
-        //     string filePath = "TestHistoryCommands5.txt";
-        //     StorageWriter storageWriter = new StorageWriter(filePath);
-        //     string[] expected = commands;
-        //
-        //     foreach (string command in commands)
-        //     {
-        //         storageWriter.SaveCommandAsync(command);
-        //     }
-        //     string[] actual = File.ReadAllLines(filePath);
-        //
-        //
-        //     Assert.Equal(expected, actual);
-        //     storageWriter.ClearFileAsync();
-        // }
-
+        
+        
         [Fact]
-        public void TestNewFigureCheckerExpectedTriangle()
+        public async Task TestNewFigureCheckerExpectedTriangleWithMoq()
         {
-            string filePathFigures = "TestForFiguresCheckerTriangle.txt";
+            // Создаем мок для интерфейса IStorageWriter
+            var mockStorageWriter = new Mock<IStorageWriter>();
 
-            StorageWriter storageWriterForFigures = new StorageWriter(filePathFigures);
-            Turtle turtle = new Turtle();
-            MoveCommand moveCommand = new MoveCommand();
-            AngleCommand angleCommand = new AngleCommand();
-            NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
+            // Список для имитации сохраненных фигур (вместо файла)
+            var savedFigures = new List<string>();
 
-            string expected = "треугольник";
+            // Настраиваем мок для записи фигур в список
+            mockStorageWriter.Setup(writer => writer.SaveCommandAsync(It.IsAny<string>()))
+                .Callback<string>(figure => savedFigures.Add(figure));
 
+            // Создаем необходимые объекты
+            var turtle = new Turtle();
+            var moveCommand = new MoveCommand();
+            var angleCommand = new AngleCommand();
+            var checker = new NewFigureChecker(turtle, mockStorageWriter.Object);
+
+            // Ожидаемая фигура - треугольник
+            var expectedFigure = "треугольник";
+
+            // Выполняем команды для создания треугольника
             for (int i = 1; i <= 3; i++)
             {
-                moveCommand.Execute(turtle, "10");
-                angleCommand.Execute(turtle, "120");
-                checker.Check();
+                moveCommand.Execute(turtle, "10"); // Движение на 10 единиц
+                angleCommand.Execute(turtle, "120"); // Поворот на 120 градусов
+                await checker.Check(); // Проверяем, образовалась ли фигура
             }
 
-            string actual = File.ReadAllLines(filePathFigures)[0];
-
-            Assert.Contains(expected, actual);
-            storageWriterForFigures.ClearFileAsync();
-
+            // Проверяем, что сохраненная фигура — треугольник
+            Assert.Contains(expectedFigure, savedFigures[0].Split(' ')[0]);
         }
 
-        
-
         [Fact]
-        public void TestNewFigureCheckerExpectedSquare()
+        public async Task TestNewFigureCheckerExpectedSquareWithMoq()
         {
-            string filePathFigures = "TestForFiguresCheckerSquare.txt";
+            // Создаем мок для интерфейса IStorageWriter
+            var mockStorageWriter = new Mock<IStorageWriter>();
 
-            StorageWriter storageWriterForFigures = new StorageWriter(filePathFigures);
-            Turtle turtle = new Turtle();
-            MoveCommand moveCommand = new MoveCommand();
-            AngleCommand angleCommand = new AngleCommand();
-            NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
+            // Список для имитации сохраненных фигур (вместо файла)
+            var savedFigures = new List<string>();
 
-            string expected = "квадрат";
+            // Настраиваем мок для записи фигур в список
+            mockStorageWriter.Setup(writer => writer.SaveCommandAsync(It.IsAny<string>()))
+                .Callback<string>(figure => savedFigures.Add(figure));
 
+            // Создаем необходимые объекты
+            var turtle = new Turtle();
+            var moveCommand = new MoveCommand();
+            var angleCommand = new AngleCommand();
+            var checker = new NewFigureChecker(turtle, mockStorageWriter.Object);
+
+            // Ожидаемая фигура - треугольник
+            var expectedFigure = "квадрат";
+
+            // Выполняем команды для создания треугольника
             for (int i = 1; i <= 4; i++)
             {
-                moveCommand.Execute(turtle, "10");
-                angleCommand.Execute(turtle, "90");
-                checker.Check();
+                moveCommand.Execute(turtle, "10"); // Движение на 10 единиц
+                angleCommand.Execute(turtle, "90"); // Поворот на 120 градусов
+                await checker.Check(); // Проверяем, образовалась ли фигура
             }
 
-            string actual = File.ReadAllLines(filePathFigures)[0];
-
-            Assert.Contains(expected, actual);
-            storageWriterForFigures.ClearFileAsync();
-
+            // Проверяем, что сохраненная фигура — треугольник
+            Assert.Contains(expectedFigure, savedFigures[0].Split(' ')[0]);
         }
 
         [Fact]
-        public void TestNewFigureCheckerExpectedPentagon()
+        public async Task TestNewFigureCheckerExpectedPentagonWithMoq()
         {
-            string filePathFigures = "TestForFiguresCheckerPentagon.txt";
+            // Создаем мок для интерфейса IStorageWriter
+            var mockStorageWriter = new Mock<IStorageWriter>();
 
-            StorageWriter storageWriterForFigures = new StorageWriter(filePathFigures);
-            Turtle turtle = new Turtle();
-            MoveCommand moveCommand = new MoveCommand();
-            AngleCommand angleCommand = new AngleCommand();
-            NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
+            // Список для имитации сохраненных фигур (вместо файла)
+            var savedFigures = new List<string>();
 
-            string expected = "пятиугольник";
+            // Настраиваем мок для записи фигур в список
+            mockStorageWriter.Setup(writer => writer.SaveCommandAsync(It.IsAny<string>()))
+                .Callback<string>(figure => savedFigures.Add(figure));
 
+            // Создаем необходимые объекты
+            var turtle = new Turtle();
+            var moveCommand = new MoveCommand();
+            var angleCommand = new AngleCommand();
+            var checker = new NewFigureChecker(turtle, mockStorageWriter.Object);
+
+            // Ожидаемая фигура - треугольник
+            var expectedFigure = "пятиугольник";
+
+            // Выполняем команды для создания треугольника
             for (int i = 1; i <= 5; i++)
             {
-                moveCommand.Execute(turtle, "10");
-                angleCommand.Execute(turtle, "72");
-                checker.Check();
+                moveCommand.Execute(turtle, "10"); // Движение на 10 единиц
+                angleCommand.Execute(turtle, "72"); // Поворот на 120 градусов
+                await checker.Check(); // Проверяем, образовалась ли фигура
             }
 
-            string actual = File.ReadAllLines(filePathFigures)[0];
-
-            Assert.Contains(expected, actual);
-            storageWriterForFigures.ClearFileAsync();
+            // Проверяем, что сохраненная фигура — треугольник
+            Assert.Contains(expectedFigure, savedFigures[0].Split(' ')[0]);
         }
 
 
 
         [Fact]
-        public void TestFigureCoords()
+        public async Task TestFigureCoords()
         {
-            string filePathFigures = "TestForFiguresChecker2.txt";
-            StorageWriter storageWriterForFigures = new StorageWriter(filePathFigures);
-            Turtle turtle = new Turtle();
-            MoveCommand moveCommand = new MoveCommand();
-            AngleCommand angleCommand = new AngleCommand();
-            NewFigureChecker checker = new NewFigureChecker(turtle, storageWriterForFigures);
-            string expected = "{(0;0)(0;10)(8,66;5)(0;-0)}";
+            // Создаем мок для интерфейса IStorageWriter
+            var mockStorageWriter = new Mock<IStorageWriter>();
 
+            // Список для имитации сохраненных данных (вместо файла)
+            var savedFigures = new List<string>();
+
+            // Настраиваем мок для записи данных в список
+            mockStorageWriter.Setup(writer => writer.SaveCommandAsync(It.IsAny<string>()))
+                .Callback<string>(figure => savedFigures.Add(figure));
+
+            // Создаем реальные объекты Turtle, MoveCommand и AngleCommand
+            var turtle = new Turtle();
+            var moveCommand = new MoveCommand();
+            var angleCommand = new AngleCommand();
+
+            // Создаем объект NewFigureChecker, передавая реального Turtle и мок IStorageWriter
+            var checker = new NewFigureChecker(turtle, mockStorageWriter.Object);
+
+            // Ожидаемое значение координат
+            var expectedCoords = "{(0;0)(0;10)(8,66;5)(0;-0)}";
+
+            // Выполняем команды для перемещения черепашки и проверки координат
             moveCommand.Execute(turtle, "10");
-            checker.Check();
+            await checker.Check();
             angleCommand.Execute(turtle, "120");
-            checker.Check();
+            await checker.Check();
             moveCommand.Execute(turtle, "10");
-            checker.Check();
+            await checker.Check();
             angleCommand.Execute(turtle, "120");
-            checker.Check();
+            await checker.Check();
             moveCommand.Execute(turtle, "10");
-            checker.Check();
+            await checker.Check();
 
-            string actual = File.ReadAllLines(filePathFigures)[0];
-
-            Assert.Contains(expected, actual);
+            // Проверяем, что сохраненная строка соответствует ожидаемым координатам
+            Assert.Contains(expectedCoords, savedFigures[0].Split(' ')[1]);
         }
 
 
