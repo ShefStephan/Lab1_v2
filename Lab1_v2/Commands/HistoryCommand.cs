@@ -19,9 +19,9 @@ namespace Lab1_v2.Commands
         }
         
 
-        public void Execute(Turtle turtle)
+        public async void Execute(Turtle turtle)
         {
-            storageReader.SetHistoryAsync();
+            await storageReader.SetHistoryAsync();
         }
 
 

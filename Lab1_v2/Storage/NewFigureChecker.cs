@@ -28,7 +28,7 @@ namespace Lab1_v2.Storage
 
 
 
-        public void Check()
+        public async Task Check()
         {
             if (turtle.GetPenCondition() == "penDown")
             {
@@ -66,7 +66,7 @@ namespace Lab1_v2.Storage
                         Console.Write("Образована новая фигура: " + figure);
                         Console.WriteLine();
 
-                        writer.SaveCommandAsync(figure + " " + CoordArrayToString());
+                        await writer.SaveCommandAsync(figure + " " + CoordArrayToString());
                         points.Clear();
                     }
                 }

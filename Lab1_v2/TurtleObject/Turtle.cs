@@ -10,12 +10,12 @@ namespace Lab1_v2.TurtleObject
 {
     public class Turtle
     {
-        double coordX;
-        double coordY;
-        bool penCondition;
-        double angle;
-        string color;
-        double width;
+        private double coordX;
+        private double coordY;
+        private bool penCondition;
+        private double angle;
+        private string color;
+        private double width;
 
 
         public Turtle()

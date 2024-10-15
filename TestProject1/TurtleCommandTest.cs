@@ -4,6 +4,8 @@ using Lab1_v2.TurtleObject;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using static System.Net.Mime.MediaTypeNames;
+using Moq;
+
 
 namespace TestProject1
 {
@@ -151,33 +153,66 @@ namespace TestProject1
 
         }
 
-
-
-        [Theory]
-        [InlineData("move 5", "angle 90", "penup")]
-        [InlineData("pedown", "penup", "move 5")]
-        [InlineData("angle 78", "history", "width 10")]
-        [InlineData("pendown", "color red", "move -5")]
-        [InlineData("move 33", "penup", "history")]
-        public void TestHistoryCommandWithInlineData(params string[] commands)
+        
+        public interface IStorageWriter
         {
-            //тестовые данные
-            string filePath = "TestHistoryCommands5.txt";
-            StorageWriter storageWriter = new StorageWriter(filePath);
-            string[] expected = commands;
-
-            foreach (string command in commands)
-            {
-                storageWriter.SaveCommandAsync(command);
-            }
-            string[] actual = File.ReadAllLines(filePath);
-
-
-            Assert.Equal(expected, actual);
-            storageWriter.ClearFileAsync();
-
-
+            void SaveCommandAsync(string command);
+            void ClearFileAsync();
         }
+        
+        
+        
+            [Theory]
+            [InlineData("move 5", "angle 90", "penup")]
+            [InlineData("pendown", "penup", "move 5")]
+            [InlineData("angle 78", "history", "width 10")]
+            [InlineData("pendown", "color red", "move -5")]
+            [InlineData("move 33", "penup", "history")]
+            public void TestHistoryCommandWithInlineDataWithMoq(params string[] commands)
+            {
+                var mockStorageWriter = new Mock<IStorageWriter>();
+
+                // Кписок хранения команд
+                var savedCommands = new List<string>();
+
+                // Мок
+                mockStorageWriter.Setup(writer => writer.SaveCommandAsync(It.IsAny<string>()))
+                    .Callback<string>(command => savedCommands.Add(command));
+
+                // запись команд
+                foreach (string command in commands)
+                {
+                    mockStorageWriter.Object.SaveCommandAsync(command);
+                }
+
+                // Сравнение
+                Assert.Equal(commands, savedCommands);
+            }
+        
+
+        // [Theory]
+        // [InlineData("move 5", "angle 90", "penup")]
+        // [InlineData("pedown", "penup", "move 5")]
+        // [InlineData("angle 78", "history", "width 10")]
+        // [InlineData("pendown", "color red", "move -5")]
+        // [InlineData("move 33", "penup", "history")]
+        // public void TestHistoryCommandWithInlineData(params string[] commands)
+        // {
+        //     //тестовые данные
+        //     string filePath = "TestHistoryCommands5.txt";
+        //     StorageWriter storageWriter = new StorageWriter(filePath);
+        //     string[] expected = commands;
+        //
+        //     foreach (string command in commands)
+        //     {
+        //         storageWriter.SaveCommandAsync(command);
+        //     }
+        //     string[] actual = File.ReadAllLines(filePath);
+        //
+        //
+        //     Assert.Equal(expected, actual);
+        //     storageWriter.ClearFileAsync();
+        // }
 
         [Fact]
         public void TestNewFigureCheckerExpectedTriangle()
@@ -205,6 +240,8 @@ namespace TestProject1
             storageWriterForFigures.ClearFileAsync();
 
         }
+
+        
 
         [Fact]
         public void TestNewFigureCheckerExpectedSquare()

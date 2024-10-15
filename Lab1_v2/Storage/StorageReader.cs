@@ -8,7 +8,7 @@ namespace Lab1_v2.Storage
 {
     public class StorageReader
     {
-        private string filePath;
+        private readonly string filePath;
         private string[] commands;
         private string[] figures;
 

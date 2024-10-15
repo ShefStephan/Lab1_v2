@@ -18,22 +18,22 @@ namespace Lab1_v2.CommandsOperation
         {
             this.reader = reader;
             this.figuresReader = figuresReader;
-            fillDict();
+            FillDict();
 
         }
 
-        private Dictionary<string, ICommands> commands_Dict = new Dictionary<string, ICommands>() { };
+        private readonly Dictionary<string, ICommands> commandsDict = new() { };
 
-        private void fillDict()
+        private void FillDict()
         {
-            commands_Dict.Add("history", new HistoryCommand(reader));
-            commands_Dict.Add("listfigures", new ListFiguresCommand(figuresReader));
-            commands_Dict.Add("move", new MoveCommand());
-            commands_Dict.Add("penup", new PenUpCommand());
-            commands_Dict.Add("angle", new AngleCommand());
-            commands_Dict.Add("pendown", new PenDownCommand());
-            commands_Dict.Add("color", new SetColorCommand());
-            commands_Dict.Add("width", new SetWidthCommand());
+            commandsDict.Add("history", new HistoryCommand(reader));
+            commandsDict.Add("listfigures", new ListFiguresCommand(figuresReader));
+            commandsDict.Add("move", new MoveCommand());
+            commandsDict.Add("penup", new PenUpCommand());
+            commandsDict.Add("angle", new AngleCommand());
+            commandsDict.Add("pendown", new PenDownCommand());
+            commandsDict.Add("color", new SetColorCommand());
+            commandsDict.Add("width", new SetWidthCommand());
 
 
         }
@@ -41,8 +41,7 @@ namespace Lab1_v2.CommandsOperation
 
         public ICommands DefineCommand(string command)
         {
-            return commands_Dict[command];
-
+            return commandsDict[command];
         }
     }
 }
